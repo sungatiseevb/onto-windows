@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 import os
 from google import genai
 from rdflib import Graph
