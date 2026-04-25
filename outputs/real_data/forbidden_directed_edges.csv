@@ -1,0 +1,10 @@
+source,target
+board_esg_oversight_score,scope1_emissions
+board_esg_oversight_score,scope2_emissions
+board_esg_oversight_score,scope3_emissions
+community_investment,scope1_emissions
+community_investment,scope2_emissions
+community_investment,scope3_emissions
+reporting_quality_score,scope1_emissions
+reporting_quality_score,scope2_emissions
+reporting_quality_score,scope3_emissions

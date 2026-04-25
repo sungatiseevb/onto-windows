@@ -21,14 +21,34 @@ query interface powered by Google Gemini.
 
 ## Project Structure
 ```
+data/
+├── raw/
+│   └── df_asst_bnk_ecb.xlsx                # Real-world ECB bank ESG source file
+└── processed/
+    ├── df_asst_bnk_ecb_clean.csv           # Model-ready numeric dataset
+    └── df_asst_bnk_ecb_clean_full.csv      # Cleaned dataset with metadata columns
+
+outputs/
+└── real_data/
+    ├── summary_metrics.csv                  # Baseline vs ontology-guided summary
+    ├── baseline_directed_edges.csv
+    ├── baseline_undirected_edges.csv
+    ├── ontology_guided_directed_edges.csv
+    ├── ontology_guided_undirected_edges.csv
+    ├── forbidden_directed_edges.csv
+    ├── baseline_semantic_violations.csv
+    └── ontology_guided_semantic_violations.csv
+
 esg-chatbot/
-├── app.py                    # Gradio web application (main prototype)
-├── causal_discovery.py       # PC algorithm with ESGOnt constraints
-├── evaluation.py             # Precision, recall, F1 evaluation
-├── query_interface.py        # CLI version of the query interface
-├── esgontology.owl           # ESGOnt ontology (604 triples)
-├── esg_dataset_causal.csv    # Synthetic ESG dataset (3,000 observations)
-└── causal_graph.png          # Causal graph visualization
+├── app.py                                   # Gradio web application (main prototype)
+├── query_interface.py                       # CLI version of the query interface
+├── causal_discovery.py                      # PC algorithm with synthetic dataset
+├── evaluation.py                            # Precision, recall, F1 evaluation
+├── prepare_real_dataset.py                  # Build cleaned real-world CSV files
+├── real_data_experiment.py                  # Run real-data causal discovery experiment
+├── esgontology.owl                          # ESGOnt ontology (604 triples)
+├── esg_dataset_causal.csv                   # Synthetic ESG dataset (3,000 observations)
+└── causal_graph.png                         # Causal graph visualization
 ```
 
 ---
@@ -120,6 +140,24 @@ cd esg-chatbot
 python evaluation.py
 ```
 This prints precision, recall, and F1 scores for both models.
+
+### Option 5: Real Data Pipeline (ECB ESG file)
+1) Prepare cleaned real dataset files:
+```bash
+python esg-chatbot/prepare_real_dataset.py
+```
+This reads from `data/raw/df_asst_bnk_ecb.xlsx` and writes:
+- `data/processed/df_asst_bnk_ecb_clean.csv` (model-ready numeric table)
+- `data/processed/df_asst_bnk_ecb_clean_full.csv` (cleaned table with metadata columns)
+
+2) Run real-data causal discovery experiment:
+```bash
+python esg-chatbot/real_data_experiment.py
+```
+This writes experiment outputs to `outputs/real_data/` including:
+- `summary_metrics.csv`
+- baseline and ontology-guided edge lists
+- forbidden-edge and semantic-violation reports
 
 ---
 

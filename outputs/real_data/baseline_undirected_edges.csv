@@ -1,0 +1,6 @@
+node_a,node_b
+scope1_emissions,scope2_emissions
+scope1_emissions,scope3_emissions
+scope2_emissions,scope3_emissions
+emission_reduction_score,board_esg_oversight_score
+sustainable_finance,total_revenue
