@@ -2,12 +2,14 @@ import os
 import gradio as gr
 from groq import Groq
 from rdflib import Graph
+from pathlib import Path
 
 client = Groq(api_key=os.environ["GROQ_API_KEY"])
 MODEL_ID = "llama-3.3-70b-versatile"
 
 g = Graph()
-g.parse("/workspaces/onto/esg-chatbot/esgontology.owl", format="xml")
+ONTOLOGY_PATH = Path(__file__).resolve().parent / "esgontology.owl"
+g.parse(ONTOLOGY_PATH.as_posix(), format="xml")
 print(f"Ontology loaded: {len(g)} triples")
 
 def clean_uri(val):

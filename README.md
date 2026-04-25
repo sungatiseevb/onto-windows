@@ -61,14 +61,27 @@ cd onto
 pip install -r requirements.txt
 ```
 
-### 3. Set your Google API key
+### 3. Set API keys
+For CLI (`query_interface.py`) you need Gemini:
 ```bash
 export GOOGLE_API_KEY="your-api-key-here"
 ```
 
-> **Tip:** To avoid setting this every session, add it to your `~/.bashrc`:
+For Gradio web app (`app.py`) you need Groq:
+```bash
+export GROQ_API_KEY="your-api-key-here"
+```
+
+> **Windows PowerShell**
+> ```powershell
+> $env:GOOGLE_API_KEY="your-api-key-here"
+> $env:GROQ_API_KEY="your-api-key-here"
+> ```
+
+> **Tip (Linux/macOS):** To avoid setting this every session, add it to your `~/.bashrc`:
 > ```bash
 > echo 'export GOOGLE_API_KEY="your-api-key-here"' >> ~/.bashrc
+> echo 'export GROQ_API_KEY="your-api-key-here"' >> ~/.bashrc
 > source ~/.bashrc
 > ```
 
@@ -79,7 +92,7 @@ export GOOGLE_API_KEY="your-api-key-here"
 ### Option 1: Gradio Web Interface (recommended)
 ```bash
 cd esg-chatbot
-python3 app.py
+python app.py
 ```
 Then open `http://localhost:7860` in your browser.
 
@@ -91,20 +104,20 @@ You can ask questions like:
 ### Option 2: Command Line Interface
 ```bash
 cd esg-chatbot
-python3 query_interface.py
+python query_interface.py
 ```
 
 ### Option 3: Run Causal Discovery
 ```bash
 cd esg-chatbot
-python3 causal_discovery.py
+python causal_discovery.py
 ```
 This generates the causal graph and saves it as `causal_graph.png`.
 
 ### Option 4: Run Evaluation
 ```bash
 cd esg-chatbot
-python3 evaluation.py
+python evaluation.py
 ```
 This prints precision, recall, and F1 scores for both models.
 

@@ -2,12 +2,14 @@
 import os
 from google import genai
 from rdflib import Graph
+from pathlib import Path
 
 client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
 MODEL_ID = "gemini-3-flash-preview"
 
 g = Graph()
-g.parse("/workspaces/onto/esg-chatbot/esgontology.owl", format="xml")
+ONTOLOGY_PATH = Path(__file__).resolve().parent / "esgontology.owl"
+g.parse(ONTOLOGY_PATH.as_posix(), format="xml")
 print(f"Ontology loaded: {len(g)} triples")
 
 def generate_sparql(question: str) -> str:
